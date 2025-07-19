@@ -1,0 +1,11 @@
+{
+    "@@locale": "en",
+    "title": "Chessalyst",
+    "@title": {
+        "description": "Title of the application"
+    },
+    "greeting": "Hello there",
+    "@greeting": {
+        "description": "Example greeting to test l10n"
+    }
+}
