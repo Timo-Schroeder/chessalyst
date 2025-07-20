@@ -18,6 +18,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   handy_window: ^0.4.0
+  chessground: ^7.1.5
+  dartchess: ^0.11.1
+  safe_change_notifier: ^0.4.0+1
+  watch_it: ^1.6.5
+  fast_immutable_collections: ^11.0.4
 
 dev_dependencies:
   flutter_test:

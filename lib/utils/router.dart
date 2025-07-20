@@ -1,4 +1,4 @@
-import 'package:chessalyst/ui/game_viewer/widgets/game_viewer_screen.dart';
+import 'package:chessalyst/ui/game_viewer/game_viewer_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
