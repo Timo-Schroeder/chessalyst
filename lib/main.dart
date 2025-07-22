@@ -24,7 +24,7 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: yaru.theme,
           darkTheme: yaru.darkTheme,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.system,
           routerConfig: router,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,

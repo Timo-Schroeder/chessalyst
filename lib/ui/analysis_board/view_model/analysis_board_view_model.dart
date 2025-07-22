@@ -1,13 +1,16 @@
+import 'package:chessalyst/domain/use_cases/pgn_game_use_case.dart';
 import 'package:chessground/chessground.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
+import 'package:watch_it/watch_it.dart';
 
-class GameViewerViewModel extends SafeChangeNotifier {
+class AnalysisBoardViewModel extends SafeChangeNotifier {
   Position _position = Chess.initial;
   Side _orientation = Side.white;
   NormalMove? _promotionMove;
   NormalMove? _lastMove;
+  PgnChildNode? _lastNode;
 
   String get fen => _position.fen;
   Side get orientation => _orientation;
@@ -30,6 +33,7 @@ class GameViewerViewModel extends SafeChangeNotifier {
       _position = _position.playUnchecked(move);
       _lastMove = move;
       _promotionMove = null;
+      _addMove(move);
     }
     notifyListeners();
   }
@@ -49,5 +53,11 @@ class GameViewerViewModel extends SafeChangeNotifier {
         _position.board.roleAt(move.from) == Role.pawn &&
         ((move.to.rank == Rank.first && _position.turn == Side.black) ||
             (move.to.rank == Rank.eighth && _position.turn == Side.white));
+  }
+
+  void _addMove(NormalMove move) {
+    PgnChildNode moveNode = PgnChildNode(PgnNodeData(san: move.uci));
+    di<PgnGameUseCase>().addMove(_lastNode, moveNode);
+    _lastNode = moveNode;
   }
 }

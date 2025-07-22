@@ -1,4 +1,4 @@
-import 'package:chessalyst/ui/game_viewer/view_model/game_viewer_view_model.dart';
+import 'package:chessalyst/ui/analysis_board/view_model/analysis_board_view_model.dart';
 import 'package:chessground/chessground.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
@@ -11,23 +11,23 @@ class AnalysisBoard extends StatelessWidget with WatchItMixin {
   @override
   Widget build(BuildContext context) {
     Side orientation = watchPropertyValue(
-      (GameViewerViewModel vm) => vm.orientation,
+      (AnalysisBoardViewModel vm) => vm.orientation,
     );
-    String fen = watchPropertyValue((GameViewerViewModel vm) => vm.fen);
+    String fen = watchPropertyValue((AnalysisBoardViewModel vm) => vm.fen);
     PlayerSide playerSide = watchPropertyValue(
-      (GameViewerViewModel vm) => vm.playerSide,
+      (AnalysisBoardViewModel vm) => vm.playerSide,
     );
     Side sideToMove = watchPropertyValue(
-      (GameViewerViewModel vm) => vm.sideToMove,
+      (AnalysisBoardViewModel vm) => vm.sideToMove,
     );
     IMap<Square, ISet<Square>> validMoves = watchPropertyValue(
-      (GameViewerViewModel vm) => vm.validMoves,
+      (AnalysisBoardViewModel vm) => vm.validMoves,
     );
     NormalMove? promotionMove = watchPropertyValue(
-      (GameViewerViewModel vm) => vm.promotionMove,
+      (AnalysisBoardViewModel vm) => vm.promotionMove,
     );
     NormalMove? lastMove = watchPropertyValue(
-      (GameViewerViewModel vm) => vm.lastMove,
+      (AnalysisBoardViewModel vm) => vm.lastMove,
     );
 
     return Chessboard(
@@ -37,8 +37,8 @@ class AnalysisBoard extends StatelessWidget with WatchItMixin {
         sideToMove: sideToMove,
         validMoves: validMoves,
         promotionMove: promotionMove,
-        onMove: di<GameViewerViewModel>().playMove,
-        onPromotionSelection: di<GameViewerViewModel>().promotionSelection,
+        onMove: di<AnalysisBoardViewModel>().playMove,
+        onPromotionSelection: di<AnalysisBoardViewModel>().promotionSelection,
       ),
       orientation: orientation,
       fen: fen,
