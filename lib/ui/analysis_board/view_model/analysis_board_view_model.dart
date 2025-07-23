@@ -6,20 +6,19 @@ import 'package:safe_change_notifier/safe_change_notifier.dart';
 import 'package:watch_it/watch_it.dart';
 
 class AnalysisBoardViewModel extends SafeChangeNotifier {
-  Position _position = Chess.initial;
+  Position position = Chess.initial;
   Side _orientation = Side.white;
   NormalMove? _promotionMove;
   NormalMove? _lastMove;
-  PgnChildNode? _lastNode;
 
-  String get fen => _position.fen;
+  String get fen => position.fen;
   Side get orientation => _orientation;
   PlayerSide get playerSide =>
-      (_position.turn == Side.white) ? PlayerSide.white : PlayerSide.black;
-  Side get sideToMove => _position.turn;
+      (position.turn == Side.white) ? PlayerSide.white : PlayerSide.black;
+  Side get sideToMove => position.turn;
   NormalMove? get promotionMove => _promotionMove;
   NormalMove? get lastMove => _lastMove;
-  IMap<Square, ISet<Square>> get validMoves => makeLegalMoves(_position);
+  IMap<Square, ISet<Square>> get validMoves => makeLegalMoves(position);
 
   void flipBoard() {
     _orientation = _orientation.opposite;
@@ -29,11 +28,14 @@ class AnalysisBoardViewModel extends SafeChangeNotifier {
   void playMove(NormalMove move, {bool? isDrop}) {
     if (_isPromotionPawnMove(move)) {
       _promotionMove = move;
-    } else if (_position.isLegal(move)) {
-      _position = _position.playUnchecked(move);
+    } else if (position.isLegal(move)) {
+      String san;
+      Position tmpPos;
+      (tmpPos, san) = position.makeSan(move);
+      position = tmpPos;
       _lastMove = move;
       _promotionMove = null;
-      _addMove(move);
+      _addMove(san);
     }
     notifyListeners();
   }
@@ -50,14 +52,13 @@ class AnalysisBoardViewModel extends SafeChangeNotifier {
   // https://github.com/lichess-org/flutter-chessground/blob/main/example/lib/main.dart
   bool _isPromotionPawnMove(NormalMove move) {
     return move.promotion == null &&
-        _position.board.roleAt(move.from) == Role.pawn &&
-        ((move.to.rank == Rank.first && _position.turn == Side.black) ||
-            (move.to.rank == Rank.eighth && _position.turn == Side.white));
+        position.board.roleAt(move.from) == Role.pawn &&
+        ((move.to.rank == Rank.first && position.turn == Side.black) ||
+            (move.to.rank == Rank.eighth && position.turn == Side.white));
   }
 
-  void _addMove(NormalMove move) {
-    PgnChildNode moveNode = PgnChildNode(PgnNodeData(san: move.uci));
-    di<PgnGameUseCase>().addMove(_lastNode, moveNode);
-    _lastNode = moveNode;
+  void _addMove(String san) {
+    PgnChildNode moveNode = PgnChildNode(PgnNodeData(san: san));
+    di<PgnGameUseCase>().addMove(moveNode);
   }
 }

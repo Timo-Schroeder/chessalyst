@@ -7,8 +7,6 @@ class GameNotationViewModel extends SafeChangeNotifier {
   final List<PgnNodeData> _mainLine = di<PgnGameUseCase>().pgnGame.moves
       .mainline()
       .toList();
-  PgnChildNode? _currentMove;
 
   List<PgnNodeData> get mainLine => _mainLine;
-  PgnChildNode? get currentMove => _currentMove;
 }
