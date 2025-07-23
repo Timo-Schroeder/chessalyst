@@ -13,6 +13,47 @@ class PgnGameUseCase extends SafeChangeNotifier {
 
   PgnGame get pgnGame => _pgnGame;
   PgnChildNode? get currentNode => _currentNode;
+  String get eventHeader => _pgnGame.headers['Event'] ?? '';
+  set eventHeader(String event) {
+    _pgnGame.headers['Event'] = event;
+    notifyListeners();
+  }
+
+  String get siteHeader => _pgnGame.headers['Site'] ?? '';
+  set siteHeader(String site) {
+    _pgnGame.headers['Site'] = site;
+    notifyListeners();
+  }
+
+  String get dateHeader => _pgnGame.headers['Date']!;
+  set dateHeader(String date) {
+    _pgnGame.headers['Date'] = date;
+    notifyListeners();
+  }
+
+  String get roundHeader => _pgnGame.headers['Round']!;
+  set roundHeader(String round) {
+    _pgnGame.headers['Round'] = round;
+    notifyListeners();
+  }
+
+  String get whiteHeader => _pgnGame.headers['White']!;
+  set whiteHeader(String white) {
+    _pgnGame.headers['White'] = white;
+    notifyListeners();
+  }
+
+  String get blackHeader => _pgnGame.headers['Black']!;
+  set blackHeader(String black) {
+    _pgnGame.headers['Black'] = black;
+    notifyListeners();
+  }
+
+  String get resultHeader => _pgnGame.headers['Result']!;
+  set resultHeader(String result) {
+    _pgnGame.headers['Result'] = result;
+    notifyListeners();
+  }
 
   void addMove(PgnChildNode newMove) {
     if (_currentNode == null) {
