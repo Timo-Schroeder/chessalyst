@@ -11,6 +11,7 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
   Widget build(BuildContext context) {
     final event = watchPropertyValue((MetadataFormViewModel vm) => vm.event);
     final site = watchPropertyValue((MetadataFormViewModel vm) => vm.site);
+    final date = watchPropertyValue((MetadataFormViewModel vm) => vm.date);
     final round = watchPropertyValue((MetadataFormViewModel vm) => vm.round);
     final white = watchPropertyValue((MetadataFormViewModel vm) => vm.white);
     final black = watchPropertyValue((MetadataFormViewModel vm) => vm.black);
@@ -48,7 +49,7 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
           firstDateTime: DateTime(0),
           lastDateTime: DateTime(DateTime.now().year),
           acceptEmpty: false,
-          initialDateTime: DateTime.now(),
+          initialDateTime: date,
           onChanged: (date) {
             if (date != null) {
               di<MetadataFormViewModel>().date = date;
@@ -86,7 +87,7 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
           },
         ),
         const SizedBox(height: 16),
-        Text('Site', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text('Result', style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         YaruPopupMenuButton<GameResult>(
           initialValue: result,
@@ -105,7 +106,6 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
           children: [
             OutlinedButton(
               onPressed: () {
-                di<MetadataFormViewModel>().cancel();
                 Navigator.maybePop(context);
               },
               child: Text('Cancel'),

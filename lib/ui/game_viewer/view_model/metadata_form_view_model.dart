@@ -54,17 +54,6 @@ class MetadataFormViewModel extends SafeChangeNotifier {
     notifyListeners();
   }
 
-  void cancel() {
-    _event = '';
-    _site = '';
-    _date = DateTime.now();
-    _round = '';
-    _white = '';
-    _black = '';
-    _result = GameResult.ongoing;
-    notifyListeners();
-  }
-
   void save() {
     di<PgnGameUseCase>().eventHeader = _event;
     di<PgnGameUseCase>().siteHeader = _site;
