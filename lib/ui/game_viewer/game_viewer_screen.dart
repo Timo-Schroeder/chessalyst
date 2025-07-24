@@ -4,6 +4,7 @@ import 'package:chessalyst/ui/core/header_bar.dart';
 import 'package:chessalyst/ui/game_notation/widgets/game_notation.dart';
 import 'package:chessalyst/ui/analysis_board/widgets/analysis_board.dart';
 import 'package:chessalyst/ui/game_viewer/view_model/game_viewer_view_model.dart';
+import 'package:chessalyst/ui/game_viewer/widgets/editing_options.dart';
 import 'package:chessalyst/ui/game_viewer/widgets/metadata_form.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
@@ -79,6 +80,7 @@ class GameViewer extends StatelessWidget with WatchItMixin {
               spacing: 16,
               children: [
                 GameNotation(),
+                EditingOptions(),
                 Row(
                   spacing: 8,
                   children: [

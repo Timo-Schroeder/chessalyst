@@ -71,6 +71,7 @@ class AnalysisBoardViewModel extends SafeChangeNotifier {
 
     if (nextMoves.length == 1) {
       _goToMove(nextMoves.first);
+      return;
     }
 
     _nextMoveOptions = nextMoves;

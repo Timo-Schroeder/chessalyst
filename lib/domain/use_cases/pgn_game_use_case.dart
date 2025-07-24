@@ -83,15 +83,23 @@ class PgnGameUseCase extends SafeChangeNotifier {
     notifyListeners();
   }
 
-  void deleteFromMove(PgnChildNode move) {
+  void deleteFromMove(PgnChildNode? move) {
+    if (move == null) {
+      _pgnGame.moves.children.clear();
+      _currentNode = null;
+      notifyListeners();
+      return;
+    }
+
     PgnNode? parent = _findParentNode(_pgnGame.moves, move);
 
     if (parent != null) {
       parent.children.remove(move);
-      if (parent.isOfExactGenericType(PgnChildNode)) {
-        _currentNode = parent as PgnChildNode;
-      } else {
+
+      if (parent == _pgnGame.moves) {
         _currentNode = null;
+      } else {
+        _currentNode = parent as PgnChildNode;
       }
     }
 
