@@ -7,5 +7,61 @@
     "greeting": "Hello there",
     "@greeting": {
         "description": "Example greeting to test l10n"
+    },
+    "metadataEventSection": "Event",
+    "@metadataEventSection": {
+        "description": "Heading for the Event TextField"
+    },
+    "metadataEventTextFieldLabel": "Event",
+    "@metadataEventTextFieldLabel": {
+        "description": "Label for the Event TextField"
+    },
+    "metadataSiteSection": "Site",
+    "@metadataSiteSection": {
+        "description": "Heading for the Site TextField"
+    },
+    "metadataSiteTextFieldLabel": "Site",
+    "@metadataSiteTextFieldLabel": {
+        "description": "Label for the Site TextField"
+    },
+    "metadataDateSection": "Date",
+    "@metadataDateSection": {
+        "description": "Heading for the Date Input field"
+    },
+    "metadataRoundSection": "Round",
+    "@metadataRoundSection": {
+        "description": "Heading for the Round TextField"
+    },
+    "metadataRoundTextFieldLabel": "Round",
+    "@metadataRoundTextFieldLabel": {
+        "description": "Label for the Round TextField"
+    },
+    "metadataWhiteSection": "White",
+    "@metadataWhiteSection": {
+        "description": "Heading for the White TextField"
+    },
+    "metadataWhiteTextFieldLabel": "White",
+    "@metadataWhiteTextFieldLabel": {
+        "description": "Label for the White TextField"
+    },
+    "metadataBlackSection": "Black",
+    "@metadataBlackSection": {
+        "description": "Heading for the Black TextField"
+    },
+    "metadataBlackTextFieldLabel": "Black",
+    "@metadataBlackTextFieldLabel": {
+        "description": "Label for the Black TextField"
+    },
+    "metadataResultSection": "Result",
+    "@metadataResultSection": {
+        "description": "Heading for the Result Popup"
+    },
+    "metadataCancelButtonText": "Cancel",
+    "@metadataCancelButtonText": {
+        "description": "Label for cancel button"
+    },
+    "metadataSaveButtonText": "Save",
+    "@metadataSaveButtonText": {
+        "description": "Label for save button"
     }
 }
