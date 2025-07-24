@@ -13,7 +13,8 @@ class GameNotation extends StatelessWidget with WatchItMixin {
 
     return YaruSection(
       padding: EdgeInsetsGeometry.all(16),
-      width: 640,
+      width: MediaQuery.of(context).size.width / 2.2,
+      height: MediaQuery.of(context).size.height / 1.5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [Text(pgnString)],

@@ -23,6 +23,7 @@ dependencies:
   safe_change_notifier: ^0.4.0+1
   watch_it: ^1.6.5
   fast_immutable_collections: ^11.0.4
+  file_picker: ^10.2.0
 
 dev_dependencies:
   flutter_test:

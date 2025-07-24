@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chessalyst/ui/analysis_board/view_model/analysis_board_view_model.dart';
 import 'package:chessground/chessground.dart';
 import 'package:dartchess/dartchess.dart';
@@ -31,7 +33,10 @@ class AnalysisBoard extends StatelessWidget with WatchItMixin {
     );
 
     return Chessboard(
-      size: MediaQuery.of(context).size.height / 1.2,
+      size: min(
+        MediaQuery.of(context).size.height / 1.2,
+        MediaQuery.of(context).size.width / 2.2,
+      ),
       game: GameData(
         playerSide: playerSide,
         sideToMove: sideToMove,

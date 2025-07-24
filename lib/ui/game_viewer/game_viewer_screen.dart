@@ -3,6 +3,7 @@ import 'package:chessalyst/ui/analysis_board/view_model/analysis_board_view_mode
 import 'package:chessalyst/ui/core/header_bar.dart';
 import 'package:chessalyst/ui/game_notation/widgets/game_notation.dart';
 import 'package:chessalyst/ui/analysis_board/widgets/analysis_board.dart';
+import 'package:chessalyst/ui/game_viewer/view_model/game_viewer_view_model.dart';
 import 'package:chessalyst/ui/game_viewer/widgets/metadata_form.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
@@ -21,6 +22,7 @@ class GameViewer extends StatelessWidget with WatchItMixin {
       if (nextMoves?.isNotEmpty ?? false) {
         showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (context) => AlertDialog(
             content: Column(
               mainAxisSize: MainAxisSize.min,
@@ -45,6 +47,11 @@ class GameViewer extends StatelessWidget with WatchItMixin {
       appBar: HeaderBar(
         title: Text(AppLocalizations.of(context)!.title),
         actions: [
+          YaruOptionButton(
+            onPressed: di<GameViewerViewModel>().saveFile,
+            child: Icon(YaruIcons.save),
+          ),
+          SizedBox(width: 8),
           YaruOptionButton(
             onPressed: () => showDialog(
               barrierDismissible: true,
