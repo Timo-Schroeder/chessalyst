@@ -1,9 +1,11 @@
 import 'package:chessalyst/l10n/app_localizations.dart';
+import 'package:chessalyst/ui/analysis_board/view_model/analysis_board_view_model.dart';
 import 'package:chessalyst/ui/core/header_bar.dart';
 import 'package:chessalyst/ui/game_notation/widgets/game_notation.dart';
 import 'package:chessalyst/ui/analysis_board/widgets/analysis_board.dart';
 import 'package:chessalyst/ui/game_viewer/widgets/metadata_form.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:yaru/yaru.dart';
 
 class GameViewer extends StatelessWidget {
@@ -34,7 +36,26 @@ class GameViewer extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.all(32),
-        child: Row(children: [AnalysisBoard(), Spacer(), GameNotation()]),
+        child: Row(
+          children: [
+            AnalysisBoard(),
+            Spacer(),
+            Column(
+              children: [
+                GameNotation(),
+                Row(
+                  children: [
+                    OutlinedButton(
+                      onPressed: () =>
+                          di<AnalysisBoardViewModel>().goToPreviousMove(),
+                      child: Text('<'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

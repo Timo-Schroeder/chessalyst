@@ -13,6 +13,11 @@ class PgnGameUseCase extends SafeChangeNotifier {
 
   PgnGame get pgnGame => _pgnGame;
   PgnChildNode? get currentNode => _currentNode;
+  set currentNode(PgnChildNode? node) {
+    _currentNode = node;
+    notifyListeners();
+  }
+
   String get eventHeader => _pgnGame.headers['Event'] ?? '';
   set eventHeader(String event) {
     _pgnGame.headers['Event'] = event;
@@ -57,8 +62,20 @@ class PgnGameUseCase extends SafeChangeNotifier {
 
   void addMove(PgnChildNode newMove) {
     if (_currentNode == null) {
+      for (var move in _pgnGame.moves.children) {
+        if (move.data.san == newMove.data.san) {
+          _currentNode = move;
+          return;
+        }
+      }
       _pgnGame.moves.children.add(newMove);
     } else {
+      for (var move in _currentNode!.children) {
+        if (move.data.san == newMove.data.san) {
+          _currentNode = move;
+          return;
+        }
+      }
       _currentNode!.children.add(newMove);
     }
     _currentNode = newMove;
@@ -94,9 +111,28 @@ class PgnGameUseCase extends SafeChangeNotifier {
     notifyListeners();
   }
 
-  void goToMove(PgnChildNode move) {
-    // set current move
-    // update position and lastMove in AnalysisBoard
+  List<String> getSANlist(PgnChildNode node) {
+    return _getSANListTail(_pgnGame.moves, node);
+  }
+
+  List<String> _getSANListTail(PgnNode root, PgnChildNode node) {
+    if (root.children.contains(node)) {
+      return List.of([node.data.san]);
+    }
+
+    for (var child in root.children) {
+      var sanList = _getSANListTail(child, node);
+      if (sanList.isNotEmpty) {
+        sanList.insert(0, child.data.san);
+        return sanList;
+      }
+    }
+
+    return List<String>.empty();
+  }
+
+  PgnNode? getPreviousMove() {
+    return _findParentNode(_pgnGame.moves, _currentNode);
   }
 
   PgnNode? _findParentNode(PgnNode root, PgnNode? node) {
