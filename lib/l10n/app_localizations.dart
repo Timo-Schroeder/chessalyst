@@ -105,6 +105,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hello there'**
   String get greeting;
+
+  /// Heading for the Event TextField
+  ///
+  /// In en, this message translates to:
+  /// **'Event'**
+  String get metadataEventSection;
+
+  /// Label for the Event TextField
+  ///
+  /// In en, this message translates to:
+  /// **'Event'**
+  String get metadataEventTextFieldLabel;
+
+  /// Heading for the Site TextField
+  ///
+  /// In en, this message translates to:
+  /// **'Site'**
+  String get metadataSiteSection;
+
+  /// Label for the Site TextField
+  ///
+  /// In en, this message translates to:
+  /// **'Site'**
+  String get metadataSiteTextFieldLabel;
+
+  /// Heading for the Date Input field
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get metadataDateSection;
+
+  /// Heading for the Round TextField
+  ///
+  /// In en, this message translates to:
+  /// **'Round'**
+  String get metadataRoundSection;
+
+  /// Label for the Round TextField
+  ///
+  /// In en, this message translates to:
+  /// **'Round'**
+  String get metadataRoundTextFieldLabel;
+
+  /// Heading for the White TextField
+  ///
+  /// In en, this message translates to:
+  /// **'White'**
+  String get metadataWhiteSection;
+
+  /// Label for the White TextField
+  ///
+  /// In en, this message translates to:
+  /// **'White'**
+  String get metadataWhiteTextFieldLabel;
+
+  /// Heading for the Black TextField
+  ///
+  /// In en, this message translates to:
+  /// **'Black'**
+  String get metadataBlackSection;
+
+  /// Label for the Black TextField
+  ///
+  /// In en, this message translates to:
+  /// **'Black'**
+  String get metadataBlackTextFieldLabel;
+
+  /// Heading for the Result Popup
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get metadataResultSection;
+
+  /// Label for cancel button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get metadataCancelButtonText;
+
+  /// Label for save button
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get metadataSaveButtonText;
 }
 
 class _AppLocalizationsDelegate

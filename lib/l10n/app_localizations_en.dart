@@ -13,4 +13,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get greeting => 'Hello there';
+
+  @override
+  String get metadataEventSection => 'Event';
+
+  @override
+  String get metadataEventTextFieldLabel => 'Event';
+
+  @override
+  String get metadataSiteSection => 'Site';
+
+  @override
+  String get metadataSiteTextFieldLabel => 'Site';
+
+  @override
+  String get metadataDateSection => 'Date';
+
+  @override
+  String get metadataRoundSection => 'Round';
+
+  @override
+  String get metadataRoundTextFieldLabel => 'Round';
+
+  @override
+  String get metadataWhiteSection => 'White';
+
+  @override
+  String get metadataWhiteTextFieldLabel => 'White';
+
+  @override
+  String get metadataBlackSection => 'Black';
+
+  @override
+  String get metadataBlackTextFieldLabel => 'Black';
+
+  @override
+  String get metadataResultSection => 'Result';
+
+  @override
+  String get metadataCancelButtonText => 'Cancel';
+
+  @override
+  String get metadataSaveButtonText => 'Save';
 }

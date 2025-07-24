@@ -1,4 +1,5 @@
 import 'package:chessalyst/domain/models/game_result.dart';
+import 'package:chessalyst/l10n/app_localizations.dart';
 import 'package:chessalyst/ui/game_viewer/view_model/metadata_form_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
@@ -22,27 +23,42 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Event', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          AppLocalizations.of(context)!.metadataEventSection,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         TextFormField(
-          decoration: InputDecoration(labelText: 'Event'),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(
+              context,
+            )!.metadataEventTextFieldLabel,
+          ),
           initialValue: event,
           onChanged: (value) {
             di<MetadataFormViewModel>().event = value;
           },
         ),
         const SizedBox(height: 16),
-        Text('Site', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          AppLocalizations.of(context)!.metadataSiteSection,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         TextFormField(
-          decoration: InputDecoration(labelText: 'Site'),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(context)!.metadataSiteTextFieldLabel,
+          ),
           initialValue: site,
           onChanged: (value) {
             di<MetadataFormViewModel>().site = value;
           },
         ),
         const SizedBox(height: 16),
-        Text('Date', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          AppLocalizations.of(context)!.metadataDateSection,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         YaruDateTimeEntry(
           includeTime: false,
@@ -57,37 +73,61 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
           },
         ),
         const SizedBox(height: 16),
-        Text('Round', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          AppLocalizations.of(context)!.metadataRoundSection,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         TextFormField(
-          decoration: InputDecoration(labelText: 'Round'),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(
+              context,
+            )!.metadataRoundTextFieldLabel,
+          ),
           initialValue: round,
           onChanged: (value) {
             di<MetadataFormViewModel>().round = value;
           },
         ),
         const SizedBox(height: 16),
-        Text('White', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          AppLocalizations.of(context)!.metadataWhiteSection,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         TextFormField(
-          decoration: InputDecoration(labelText: 'White'),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(
+              context,
+            )!.metadataWhiteTextFieldLabel,
+          ),
           initialValue: white,
           onChanged: (value) {
             di<MetadataFormViewModel>().white = value;
           },
         ),
         const SizedBox(height: 16),
-        Text('Black', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          AppLocalizations.of(context)!.metadataBlackSection,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         TextFormField(
-          decoration: InputDecoration(labelText: 'Black'),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(
+              context,
+            )!.metadataBlackTextFieldLabel,
+          ),
           initialValue: black,
           onChanged: (value) {
             di<MetadataFormViewModel>().black = value;
           },
         ),
         const SizedBox(height: 16),
-        Text('Result', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          AppLocalizations.of(context)!.metadataResultSection,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         YaruPopupMenuButton<GameResult>(
           initialValue: result,
@@ -108,7 +148,9 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
               onPressed: () {
                 Navigator.maybePop(context);
               },
-              child: Text('Cancel'),
+              child: Text(
+                AppLocalizations.of(context)!.metadataCancelButtonText,
+              ),
             ),
             const SizedBox(width: 16),
             ElevatedButton(
@@ -116,7 +158,7 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
                 di<MetadataFormViewModel>().save();
                 Navigator.maybePop(context);
               },
-              child: Text('Save'),
+              child: Text(AppLocalizations.of(context)!.metadataSaveButtonText),
             ),
           ],
         ),
