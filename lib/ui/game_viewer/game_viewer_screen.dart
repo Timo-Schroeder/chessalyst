@@ -13,6 +13,34 @@ class GameViewer extends StatelessWidget with WatchItMixin {
 
   @override
   Widget build(BuildContext context) {
+    final nextMoves = watchPropertyValue(
+      (AnalysisBoardViewModel vm) => vm.nextMoveOptions,
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (nextMoves?.isNotEmpty ?? false) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 8,
+              children: [
+                for (var move in nextMoves!)
+                  OutlinedButton(
+                    onPressed: () {
+                      di<AnalysisBoardViewModel>().goToNextMove(move);
+                      Navigator.maybePop(context);
+                    },
+                    child: Text(move.data.san),
+                  ),
+              ],
+            ),
+          ),
+        );
+      }
+    });
+
     return Scaffold(
       appBar: HeaderBar(
         title: Text(AppLocalizations.of(context)!.title),

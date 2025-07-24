@@ -67,7 +67,6 @@ class AnalysisBoardViewModel extends SafeChangeNotifier {
 
   void getNextMoveOptions() {
     var nextMoves = di<PgnGameUseCase>().getNextMoves();
-    print(nextMoves.length);
     if (nextMoves.isEmpty) return;
 
     if (nextMoves.length == 1) {
