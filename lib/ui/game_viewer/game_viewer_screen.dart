@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:yaru/yaru.dart';
 
-class GameViewer extends StatelessWidget {
+class GameViewer extends StatelessWidget with WatchItMixin {
   const GameViewer({super.key});
 
   @override
@@ -41,14 +41,31 @@ class GameViewer extends StatelessWidget {
             AnalysisBoard(),
             Spacer(),
             Column(
+              spacing: 16,
               children: [
                 GameNotation(),
                 Row(
+                  spacing: 8,
                   children: [
+                    OutlinedButton(
+                      onPressed: () =>
+                          di<AnalysisBoardViewModel>().goToFirstMove(),
+                      child: Text('<<'),
+                    ),
                     OutlinedButton(
                       onPressed: () =>
                           di<AnalysisBoardViewModel>().goToPreviousMove(),
                       child: Text('<'),
+                    ),
+                    OutlinedButton(
+                      onPressed: () =>
+                          di<AnalysisBoardViewModel>().getNextMoveOptions(),
+                      child: Text('>'),
+                    ),
+                    OutlinedButton(
+                      onPressed: () =>
+                          di<AnalysisBoardViewModel>().goToLastMove(),
+                      child: Text('>>'),
                     ),
                   ],
                 ),

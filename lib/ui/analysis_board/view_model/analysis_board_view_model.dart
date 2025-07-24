@@ -10,6 +10,7 @@ class AnalysisBoardViewModel extends SafeChangeNotifier {
   Side _orientation = Side.white;
   NormalMove? _promotionMove;
   NormalMove? _lastMove;
+  List<PgnChildNode>? _nextMoveOptions;
 
   Position get position => _position;
   String get fen => _position.fen;
@@ -20,6 +21,7 @@ class AnalysisBoardViewModel extends SafeChangeNotifier {
   NormalMove? get promotionMove => _promotionMove;
   NormalMove? get lastMove => _lastMove;
   IMap<Square, ISet<Square>> get validMoves => makeLegalMoves(_position);
+  List<PgnChildNode>? get nextMoveOptions => _nextMoveOptions;
 
   void flipBoard() {
     _orientation = _orientation.opposite;
@@ -50,15 +52,50 @@ class AnalysisBoardViewModel extends SafeChangeNotifier {
     notifyListeners();
   }
 
+  void goToFirstMove() {
+    _position = Chess.initial;
+    _lastMove = null;
+    di<PgnGameUseCase>().currentNode = null;
+    notifyListeners();
+  }
+
   void goToPreviousMove() {
     var previousMoveNode = di<PgnGameUseCase>().getPreviousMove();
+
+    _goToMove(previousMoveNode);
+  }
+
+  void getNextMoveOptions() {
+    var nextMoves = di<PgnGameUseCase>().getNextMoves();
+    print(nextMoves.length);
+    if (nextMoves.isEmpty) return;
+
+    if (nextMoves.length == 1) {
+      _goToMove(nextMoves.first);
+    }
+
+    _nextMoveOptions = nextMoves;
+    notifyListeners();
+  }
+
+  void goToNextMove(PgnChildNode nextMove) {
+    _nextMoveOptions = null;
+
+    _goToMove(nextMove);
+  }
+
+  void goToLastMove() {
+    var lastMoveNode = di<PgnGameUseCase>().getLastMove();
+
+    _goToMove(lastMoveNode);
+  }
+
+  void _goToMove(PgnNode? moveToGo) {
+    PgnNode? move = moveToGo;
     List<String> sanList;
 
-    // If type casting fails, we are at the root of the game. Just reset everything.
     try {
-      sanList = di<PgnGameUseCase>().getSANlist(
-        previousMoveNode as PgnChildNode,
-      );
+      sanList = di<PgnGameUseCase>().getSANlist(move as PgnChildNode);
     } catch (e) {
       _position = Chess.initial;
       _lastMove = null;
@@ -68,16 +105,16 @@ class AnalysisBoardViewModel extends SafeChangeNotifier {
     }
 
     Position pos = Chess.initial;
-    Move? move;
+    Move? nextMove;
     for (var san in sanList) {
-      move = pos.parseSan(san);
-      if (move == null) break;
-      pos = pos.play(move);
+      nextMove = pos.parseSan(san);
+      if (nextMove == null) break;
+      pos = pos.play(nextMove);
     }
 
     _position = pos;
-    _lastMove = move as NormalMove;
-    di<PgnGameUseCase>().currentNode = previousMoveNode;
+    _lastMove = nextMove as NormalMove;
+    di<PgnGameUseCase>().currentNode = move;
     notifyListeners();
   }
 

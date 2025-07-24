@@ -131,8 +131,25 @@ class PgnGameUseCase extends SafeChangeNotifier {
     return List<String>.empty();
   }
 
+  List<PgnChildNode> getNextMoves() {
+    if (_currentNode == null) return _pgnGame.moves.children;
+
+    return _currentNode?.children ?? List.empty();
+  }
+
   PgnNode? getPreviousMove() {
     return _findParentNode(_pgnGame.moves, _currentNode);
+  }
+
+  PgnNode? getLastMove() {
+    if (_pgnGame.moves.children.isEmpty) return null;
+
+    var move = _pgnGame.moves.children.first;
+    while (move.children.isNotEmpty) {
+      move = move.children.first;
+    }
+
+    return move;
   }
 
   PgnNode? _findParentNode(PgnNode root, PgnNode? node) {
