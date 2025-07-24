@@ -1,5 +1,4 @@
 import 'package:dartchess/dartchess.dart';
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
 class PgnGameUseCase extends SafeChangeNotifier {
@@ -57,6 +56,12 @@ class PgnGameUseCase extends SafeChangeNotifier {
   String get resultHeader => _pgnGame.headers['Result']!;
   set resultHeader(String result) {
     _pgnGame.headers['Result'] = result;
+    notifyListeners();
+  }
+
+  void updateNode(PgnChildNode node, PgnNodeData data) {
+    node.data = data;
+
     notifyListeners();
   }
 

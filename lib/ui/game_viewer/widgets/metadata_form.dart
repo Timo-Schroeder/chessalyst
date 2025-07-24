@@ -152,7 +152,7 @@ class MetadataForm extends StatelessWidget with WatchItMixin {
                 AppLocalizations.of(context)!.metadataCancelButtonText,
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 32),
             ElevatedButton(
               onPressed: () {
                 di<MetadataFormViewModel>().save();

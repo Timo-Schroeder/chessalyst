@@ -8,6 +8,38 @@ import 'package:safe_change_notifier/safe_change_notifier.dart';
 import 'package:watch_it/watch_it.dart';
 
 class GameViewerViewModel extends SafeChangeNotifier {
+  bool _addCommentBefore = false;
+  String _comment = '';
+
+  bool get addCommentBefore => _addCommentBefore;
+  set addCommentBefore(bool addBefore) {
+    _addCommentBefore = addBefore;
+    notifyListeners();
+  }
+
+  String get comment => _comment;
+  set comment(String comment) {
+    _comment = comment;
+    notifyListeners();
+  }
+
+  void saveComment() {
+    final currentMove = di<PgnGameUseCase>().currentNode;
+    if (currentMove == null) return;
+
+    var data = currentMove.data;
+    if (_addCommentBefore) {
+      data.startingComments = List.of([_comment]);
+    } else {
+      data.comments = List.of([_comment]);
+    }
+
+    _addCommentBefore = false;
+    _comment = '';
+
+    notifyListeners();
+  }
+
   void saveFile() async {
     String game = di<PgnGameUseCase>().pgnGame.makePgn();
     Uint8List bytes = Uint8List.fromList(utf8.encode(game));

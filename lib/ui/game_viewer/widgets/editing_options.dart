@@ -1,5 +1,6 @@
 import 'package:chessalyst/ui/analysis_board/view_model/analysis_board_view_model.dart';
 import 'package:chessalyst/ui/game_viewer/view_model/game_viewer_view_model.dart';
+import 'package:chessalyst/ui/game_viewer/widgets/comment_form.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:yaru/yaru.dart';
@@ -20,6 +21,18 @@ class EditingOptions extends StatelessWidget with WatchItMixin {
           YaruOptionButton(
             onPressed: di<AnalysisBoardViewModel>().flipBoard,
             child: Icon(YaruIcons.flip_vertical),
+          ),
+          YaruOptionButton(
+            onPressed: () => showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => AlertDialog(
+                title: YaruDialogTitleBar(title: Text('You were saying..?')),
+                titlePadding: EdgeInsets.zero,
+                content: CommentForm(),
+              ),
+            ),
+            child: Icon(YaruIcons.chat_bubble),
           ),
           YaruOptionButton(
             onPressed: di<GameViewerViewModel>().promoteLine,
